@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 // const { errors } = require('celebrate');
 
-// const routes = require('./routes/router');
+const routes = require('./routes/router');
 // const { requestLogger, errorLogger } = require('./middlewares/logger');
 // const errorsHandler = require('./errors/error-handler');
 
@@ -19,7 +19,7 @@ app.use(cookieParser()); // подключаем парсер cookie
 
 // app.use(requestLogger); // подключаем логгер запросов
 
-// app.use(routes);
+app.use(routes);
 
 // app.use(errorLogger); // подключаем логгер ошибок
 
