@@ -6,6 +6,7 @@ const BadRequestError = require('../errors/bad-request-error');
 // возвращает все сохранённые текущим пользователем фильмы
 const getMovies = (req, res, next) => {
   Movie.find()
+    .orFail(() => new NotFoundError('Нет сохраненных фильмов'))
     .then((movie) => {
       if (!movie.owner.equals(req.user._id)) {
         return next(new NotFoundError('Нет сохраненных фильмов'));

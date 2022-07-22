@@ -2,11 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-// const { errors } = require('celebrate');
+const { errors } = require('celebrate');
 
 const routes = require('./routes/router');
 // const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const errorsHandler = require('./errors/error-handler');
+const errorsHandler = require('./errors/error-handler');
 
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
@@ -24,10 +24,10 @@ app.use(routes);
 // app.use(errorLogger); // подключаем логгер ошибок
 
 // обработчики ошибок
-// app.use(errors()); // обработчик ошибок celebrate
+app.use(errors()); // обработчик ошибок celebrate
 
 // централизованная обработка ошибок
-// app.use(errorsHandler);
+app.use(errorsHandler);
 
 app.listen(PORT, async () => {
   // подключаемся к серверу mongo
