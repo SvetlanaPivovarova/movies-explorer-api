@@ -35,6 +35,10 @@ router.use(auth);
 router.use('/users', userRouter);
 router.use('/movies', movieRouter);
 
+router.get('/signout', (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+});
+
 router.use((req, res, next) => next(new NotFoundError('Запрашиваемая страница не найдена')));
 
 module.exports = router;
