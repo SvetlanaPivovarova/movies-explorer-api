@@ -28,7 +28,7 @@ const createMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
@@ -42,7 +42,7 @@ const createMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
@@ -65,7 +65,7 @@ const deleteMovie = (req, res, next) => {
   Movie.findById(id)
     .orFail(() => new NotFoundError('Нет фильма по заданному id'))
     .then((movie) => movie.remove()
-      .then(() => res.send({ message: 'Фильм удален из "Сохраненные"' })))
+      .then(() => res.send({ message: 'Фильм удален из сохраненных"' })))
     .catch(next);
 };
 
