@@ -50,9 +50,9 @@ const movieSchema = new mongoose.Schema({
     },
   },
   owner: { // _id пользователя, который сохранил фильм
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'user',
-  required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
   },
   movieId: { // id фильма, который содержится в ответе сервиса MoviesExplorer
     type: String,
