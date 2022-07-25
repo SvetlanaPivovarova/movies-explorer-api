@@ -6,7 +6,6 @@ const movieRouter = require('./movies');
 const auth = require('../middlewares/auth');
 const { createUser, login } = require('../controllers/users');
 const NotFoundError = require('../errors/not-found-error');
-// const regex = require('../utils/constance');
 
 // роуты, не требующие авторизации
 router.post(

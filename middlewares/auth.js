@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const AuthError = require('../errors/auth-error');
 
-// const { JWT_SECRET = 'DIPLOMA_SECRET' } = process.env.JWT_SECRET;
-const JWT_SECRET = 'SECRET_PROJECT';
+const { NODE_ENV, JWT_SECRET } = process.env;
+// const JWT_SECRET = 'SECRET_PROJECT';
 
 const auth = (req, res, next) => {
   const { cookies } = req;
@@ -16,7 +16,7 @@ const auth = (req, res, next) => {
 
     // попытаемся верифицировать токен
     try {
-      payload = jwt.verify(token, JWT_SECRET);
+      payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'DIPLOMA_SECRET');
     } catch (err) {
       // next(res.status(ERROR_AUTH).send({ error: 'jwt token is not valid' }));
       return next(new AuthError('jwt token is not valid'));

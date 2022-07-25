@@ -7,8 +7,8 @@ const BadRequestError = require('../errors/bad-request-error');
 const AuthDataError = require('../errors/auth-data-error');
 const AuthError = require('../errors/auth-error');
 
-// const { JWT_SECRET = 'DIPLOMA_SECRET' } = process.env.JWT_SECRET;
-const JWT_SECRET = 'SECRET_PROJECT';
+const { NODE_ENV, JWT_SECRET } = process.env;
+// const JWT_SECRET = 'SECRET_PROJECT';
 
 // создаёт пользователя с переданными в теле
 // email, password и name
@@ -56,7 +56,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        JWT_SECRET,
+        NODE_ENV === 'production' ? JWT_SECRET : 'DIPLOMA_SECRET',
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, {
