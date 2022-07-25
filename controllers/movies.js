@@ -1,19 +1,13 @@
 const Movie = require('../models/movie');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
-// const ForbiddenError = require('../errors/forbidden-error');
+const ForbiddenError = require('../errors/forbidden-error');
 
 // возвращает все сохранённые текущим пользователем фильмы
 const getMovies = (req, res, next) => {
-  Movie.find()
+  Movie.find({ owner: req.user._id })
     .orFail(() => new NotFoundError('Нет сохраненных фильмов'))
-    .then((movie) => {
-      if (!movie.owner.equals(req.user._id)) {
-        return next(new NotFoundError('Нет сохраненных фильмов'));
-      }
-
-      return movie;
-    })
+    .then((movies) => res.send(movies))
     .catch(next);
 };
 
@@ -64,8 +58,14 @@ const deleteMovie = (req, res, next) => {
   const id = req.params._id;
   Movie.findById(id)
     .orFail(() => new NotFoundError('Нет фильма по заданному id'))
-    .then((movie) => movie.remove()
-      .then(() => res.send({ message: 'Фильм удален из сохраненных"' })))
+    .then((movie) => {
+      console.log(movie.owner);
+      if (!movie.owner.equals(req.user._id)) {
+        return next(new ForbiddenError('Нельзя удалить чужой фильм'));
+      }
+      return movie.remove()
+        .then(() => res.send({ message: 'Фильм удален из сохраненных' }))
+    })
     .catch(next);
 };
 
