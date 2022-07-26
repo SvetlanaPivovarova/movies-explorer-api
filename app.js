@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 
+// const MONGO = require('./utils/constance');
 const cors = require('./middlewares/cors');
 const routes = require('./routes/router');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -38,10 +39,10 @@ app.use(errorsHandler);
 app.listen(PORT, async () => {
   // подключаемся к серверу mongo
   mongoose.connection.on('connected', () => {
-    console.log('mongodb connected!!!');
+    // console.log('mongodb connected!!!');
   });
   await mongoose.connect(
     'mongodb://localhost:27017/bitfilmsdb',
   );
-  console.log(`App listening on port ${PORT}`);
+  // console.log(`App listening on port ${PORT}`);
 });
