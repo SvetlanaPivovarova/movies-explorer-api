@@ -1,7 +1,7 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'https://pivovarova.pro.nomoredomains.xyz',
-  'http://pivovarova.pro.nomoredomains.xyz',
+  'https://pivovarova.diploma.nomoredomains.xyz',
+  'http://pivovarova.diploma.nomoredomains.xyz',
   'localhost:3000',
 ];
 // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
