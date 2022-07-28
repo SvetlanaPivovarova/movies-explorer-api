@@ -7,8 +7,7 @@ const BadRequestError = require('../errors/bad-request-error');
 const AuthDataError = require('../errors/auth-data-error');
 const AuthError = require('../errors/auth-error');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
-// const JWT_SECRET = 'SECRET_PROJECT';
+const { NODE_ENV, JWT_SECRET } = require('../utils/constants');
 
 // создаёт пользователя с переданными в теле
 // email, password и name

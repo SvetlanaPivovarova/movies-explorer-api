@@ -6,14 +6,13 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 
-// const MONGO = require('./utils/constance');
+const {
+  PORT, dataBaseUrl, NODE_ENV, DB_PATH,
+} = require('./utils/constants');
 const cors = require('./middlewares/cors');
-const routes = require('./routes/router');
+const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorsHandler = require('./errors/error-handler');
-
-// Слушаем 3000 порт
-const { PORT = 3000 } = process.env;
 
 const app = express();
 
@@ -41,8 +40,6 @@ app.listen(PORT, async () => {
   mongoose.connection.on('connected', () => {
     // console.log('mongodb connected!!!');
   });
-  await mongoose.connect(
-    'mongodb://localhost:27017/bitfilmsdb',
-  );
+  await mongoose.connect(NODE_ENV === 'production' ? DB_PATH : dataBaseUrl);
   // console.log(`App listening on port ${PORT}`);
 });
