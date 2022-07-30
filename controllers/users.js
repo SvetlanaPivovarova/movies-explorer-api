@@ -85,18 +85,26 @@ const updateUserProfile = (req, res, next) => {
   const { _id } = req.user;
   const { email, name } = req.body;
 
-  User.findByIdAndUpdate(_id, { email, name }, { new: true, runValidators: true })
-    .orFail(() => new NotFoundError('Пользователь с указанным _id не найден'))
+  User.findOne({ email })
     .then((user) => {
-      res.send({ data: user });
-    })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Некорректные данные при обновлении информации о пользователе'));
+      if (user) {
+        throw new AuthDataError('Такой email уже используется, выбирите другой');
       } else {
-        next(err);
+        User.findByIdAndUpdate(_id, { email, name }, { new: true, runValidators: true })
+          .orFail(() => new NotFoundError('Пользователь с указанным _id не найден'))
+          .then(() => {
+            res.send({ data: user });
+          })
+          .catch((err) => {
+            if (err.name === 'ValidationError') {
+              next(new BadRequestError('Некорректные данные при обновлении информации о пользователе'));
+            } else {
+              next(err);
+            }
+          });
       }
-    });
+    })
+    .catch(next);
 };
 
 module.exports = {
