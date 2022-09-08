@@ -15,6 +15,16 @@
 * Страница авторизации. На ней пользователь может войти в систему.
 * Страница редактирования профиля. Пользователь может изменить данные своего аккаунта.
 
+**Технологии**
+- Express.js
+- MongoDB
+- ESLint
+
+**Доступные скрипты**
+
+`npm run start` — запускает сервер   
+`npm run dev` — запускает сервер с hot-reload
+
 **Размещение проекта**
 * [Movies-explorer](https://pivovarova.diploma.nomoredomains.xyz/)
 * [Сервер](https://api.pivovarova.diploma.nomoredomains.xyz/)
