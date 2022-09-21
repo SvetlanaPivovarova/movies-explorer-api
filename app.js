@@ -38,8 +38,8 @@ app.use(errorsHandler);
 app.listen(PORT, async () => {
   // подключаемся к серверу mongo
   mongoose.connection.on('connected', () => {
-  // console.log('mongodb connected!!!');
+   console.log('mongodb connected!!!');
   });
   await mongoose.connect(NODE_ENV === 'production' ? DB_PATH : dataBaseUrl);
-  // console.log(`App listening on port ${PORT}`);
+   console.log(`App listening on port ${PORT}`);
 });

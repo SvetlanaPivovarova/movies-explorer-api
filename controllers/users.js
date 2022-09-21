@@ -92,8 +92,8 @@ const updateUserProfile = (req, res, next) => {
       } else {
         User.findByIdAndUpdate(_id, { email, name }, { new: true, runValidators: true })
           .orFail(() => new NotFoundError('Пользователь с указанным _id не найден'))
-          .then(() => {
-            res.send({ data: user });
+          .then((user) => {
+            return res.send({ data: user });
           })
           .catch((err) => {
             if (err.name === 'ValidationError') {
