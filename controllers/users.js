@@ -59,7 +59,7 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       // вернём токен
-      res.send({ token, _id: user._id });
+      return res.send({ token, _id: user._id });
       // res.cookie('jwt', token, {
       //  maxAge: 3600000 * 24 * 7,
       //  httpOnly: true,
