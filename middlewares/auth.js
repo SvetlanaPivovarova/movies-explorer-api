@@ -4,14 +4,21 @@ const AuthError = require('../errors/auth-error');
 const { NODE_ENV, JWT_SECRET } = require('../utils/constants');
 
 const auth = (req, res, next) => {
-  const { cookies } = req;
+  // const { cookies } = req;
+  const { authorization } = req.headers;
 
-  if (!cookies) {
-    throw new AuthError('Авторизация не успешна');
-    // next(res.status(ERROR_AUTH).send({ error: 'Авторизация не успешна' }));
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    throw (new AuthError('Необходима авторизация'));
   } else {
-    const token = cookies.jwt;
+    const token = authorization.replace('Bearer ', '');
     let payload;
+
+  // if (!cookies) {
+  //  throw new AuthError('Авторизация не успешна');
+    // next(res.status(ERROR_AUTH).send({ error: 'Авторизация не успешна' }));
+  // } else {
+  //  const token = cookies.jwt;
+  //  let payload;
 
     // попытаемся верифицировать токен
     try {
