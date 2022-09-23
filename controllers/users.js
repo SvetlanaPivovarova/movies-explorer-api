@@ -58,11 +58,13 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'DIPLOMA_SECRET',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-      })
-        .send({ token, _id: user._id });
+      // вернём токен
+      res.send({ token, _id: user._id });
+      // res.cookie('jwt', token, {
+      //  maxAge: 3600000 * 24 * 7,
+      //  httpOnly: true,
+      // })
+      //  .send({ token, _id: user._id });
     })
     .catch(() => {
       next(new AuthError('Укажите верные e-mail и пароль'));
