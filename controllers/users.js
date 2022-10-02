@@ -87,11 +87,11 @@ const updateUserProfile = (req, res, next) => {
   const { _id } = req.user;
   const { email, name } = req.body;
 
-  User.findOne({ email })
-    .then((user) => {
-      if (user) {
-        throw new AuthDataError('Такой email уже используется, выбирите другой');
-      } else {
+  // User.findOne({ email })
+    // .then((user) => {
+      // if (user) {
+        // throw new AuthDataError('Такой email уже используется, выбирите другой');
+      // } else {
         User.findByIdAndUpdate(_id, { email, name }, { new: true, runValidators: true })
           .orFail(() => new NotFoundError('Пользователь с указанным _id не найден'))
           .then((user) => {
@@ -104,9 +104,9 @@ const updateUserProfile = (req, res, next) => {
               next(err);
             }
           });
-      }
-    })
-    .catch(next);
+      // }
+    // })
+    // .catch(next);
 };
 
 module.exports = {
