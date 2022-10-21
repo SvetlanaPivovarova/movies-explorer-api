@@ -4,7 +4,8 @@ const allowedCors = [
   'http://pivovarova.diploma.nomoredomains.xyz',
   'localhost:3000',
   'http://localhost:3000',
-  'https://localhost:3000'
+  'https://localhost:3000',
+  'http://localhost:63342'
 
 ];
 // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)

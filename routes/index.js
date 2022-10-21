@@ -3,6 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 
 const userRouter = require('./users');
 const movieRouter = require('./movies');
+const tokenRouter = require('./tokens');
 const auth = require('../middlewares/auth');
 const { createUser, login } = require('../controllers/users');
 const NotFoundError = require('../errors/not-found-error');
@@ -20,12 +21,15 @@ router.post(
   createUser,
 );
 
+
 router.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
+
+router.use('/tokens', tokenRouter);
 
 // авторизация
 router.use(auth);
