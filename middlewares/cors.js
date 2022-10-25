@@ -5,7 +5,8 @@ const allowedCors = [
   'localhost:3000',
   'http://localhost:3000',
   'https://localhost:3000',
-  'http://localhost:63342'
+  'http://localhost:63342',
+  'https://svetlanapivovarova.github.io/mithril-token-service'
 
 ];
 // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
