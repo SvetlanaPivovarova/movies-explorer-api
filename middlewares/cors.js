@@ -6,7 +6,7 @@ const allowedCors = [
   'http://localhost:3000',
   'https://localhost:3000',
   'http://localhost:63342',
-  'http://http://localhost:5173',
+  'http://localhost:5173',
   'https://svetlanapivovarova.github.io/mithril-token-service'
 
 ];
